@@ -4,7 +4,7 @@
 - "Decision Trees";
 - "Random forest";
 - "Naïve Bayes";
-- "Support Vector machine".
+- "Support Vector Machines".
 
 2. Затем нужно сравнить точность и производительность каждого метода для разных значений гиперпараметров в пространствах разной размерности. 
 
