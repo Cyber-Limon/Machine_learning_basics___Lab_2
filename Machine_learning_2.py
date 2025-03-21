@@ -40,9 +40,9 @@ table_knc  = PrettyTable()
 table_rnc  = PrettyTable()
 table_nc   = PrettyTable()
 table_dtc  = PrettyTable()
-table_rfc = PrettyTable()
-table_gnb = PrettyTable()
-table_svc = PrettyTable()
+table_rfc  = PrettyTable()
+table_gnb  = PrettyTable()
+table_svc  = PrettyTable()
 table_best = PrettyTable()
 
 # Добавление колонок в "таблицы"
