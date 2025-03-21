@@ -35,7 +35,7 @@ eigenvalues = pca.explained_variance_
 
 
 
-# Создание "таблиц" для представления результатов
+# Создание таблиц для представления результатов
 table_knc  = PrettyTable()
 table_rnc  = PrettyTable()
 table_nc   = PrettyTable()
@@ -45,7 +45,7 @@ table_gnb  = PrettyTable()
 table_svc  = PrettyTable()
 table_best = PrettyTable()
 
-# Добавление колонок в "таблицы"
+# Добавление колонок в таблицы
 table_knc.field_names  = ["Размерность пространства", "Точность", "Время выполнения", "k",               "Вес"        ]
 table_rnc.field_names  = ["Размерность пространства", "Точность", "Время выполнения", "Радиус",          "Вес"        ]
 table_nc.field_names   = ["Размерность пространства", "Точность", "Время выполнения", "Метрика",         "-"          ]
