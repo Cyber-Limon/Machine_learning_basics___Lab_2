@@ -1,7 +1,7 @@
 from ucimlrepo import fetch_ucirepo
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
-from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier, NearestCentroid
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -87,7 +87,6 @@ def table_best_formation(table, best):
 for component in range(1, len(eigenvalues) + 1):
     pca = PCA(n_components=component)
     X = pca.fit_transform(x_scaled)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 
 
@@ -97,7 +96,7 @@ for component in range(1, len(eigenvalues) + 1):
             knc = KNeighborsClassifier(n_neighbors=k, weights=weight)
 
             start_time = time.time()
-            scores = cross_val_score(knc, X_train, y_train, cv=10)
+            scores = cross_val_score(knc, X, y, cv=10)
             end_time = time.time()
 
             search_for_best_results(table_knc, best_knc, component, scores.mean(), end_time - start_time, k, weight)
@@ -110,7 +109,7 @@ for component in range(1, len(eigenvalues) + 1):
             rnc = RadiusNeighborsClassifier(radius=radius, weights=weight)
 
             start_time = time.time()
-            scores = cross_val_score(rnc, X_train, y_train, cv=10)
+            scores = cross_val_score(rnc, X, y, cv=10)
             end_time = time.time()
 
             search_for_best_results(table_rnc, best_rnc, component, scores.mean(), end_time - start_time, radius, weight)
@@ -122,7 +121,7 @@ for component in range(1, len(eigenvalues) + 1):
         nc = NearestCentroid(metric=metric)
 
         start_time = time.time()
-        scores = cross_val_score(nc, X_train, y_train, cv=10)
+        scores = cross_val_score(nc, X, y, cv=10)
         end_time = time.time()
 
         search_for_best_results(table_nc, best_nc, component, scores.mean(), end_time - start_time, metric, "-")
@@ -135,7 +134,7 @@ for component in range(1, len(eigenvalues) + 1):
             dtc = DecisionTreeClassifier(criterion=criterion, splitter=splitter)
 
             start_time = time.time()
-            scores = cross_val_score(dtc, X_train, y_train, cv=10)
+            scores = cross_val_score(dtc, X, y, cv=10)
             end_time = time.time()
 
             search_for_best_results(table_dtc, best_dtc, component, scores.mean(), end_time - start_time, criterion, splitter)
@@ -148,7 +147,7 @@ for component in range(1, len(eigenvalues) + 1):
             rfc = RandomForestClassifier(n_estimators=n, criterion=criterion)
 
             start_time = time.time()
-            scores = cross_val_score(rfc, X_train, y_train, cv=10)
+            scores = cross_val_score(rfc, X, y, cv=10)
             end_time = time.time()
 
             search_for_best_results(table_rfc, best_rfc, component, scores.mean(), end_time - start_time, n, criterion)
@@ -160,10 +159,10 @@ for component in range(1, len(eigenvalues) + 1):
         gnb = GaussianNB(var_smoothing=(pow(10, var_smoothing)))
 
         start_time = time.time()
-        scores = cross_val_score(gnb, X_train, y_train, cv=10)
+        scores = cross_val_score(gnb, X, y, cv=10)
         end_time = time.time()
 
-        search_for_best_results(table_gnb, best_gnb, component,scores.mean(), end_time - start_time, var_smoothing, "-")
+        search_for_best_results(table_gnb, best_gnb, component, scores.mean(), end_time - start_time, var_smoothing, "-")
 
 
 
@@ -173,7 +172,7 @@ for component in range(1, len(eigenvalues) + 1):
             svc = SVC(kernel=kernel, degree=n)
 
             start_time = time.time()
-            scores = cross_val_score(svc, X_train, y_train, cv=10)
+            scores = cross_val_score(svc, X, y, cv=10)
             end_time = time.time()
 
             search_for_best_results(table_svc, best_svc, component, scores.mean(), end_time - start_time, kernel, n)
